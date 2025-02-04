@@ -1,0 +1,149 @@
+1. Variables and Data Types
+Variables are names that refer to objects in memory. In Python you don’t need to declare a variable’s type beforehand—the type is determined by the value assigned. Common built‑in data types include:
+
+Numeric:
+
+int for integers (e.g. 5)
+float for floating‑point numbers (e.g. 3.14)
+complex for complex numbers (e.g. 2+3j)
+Text:
+
+str for strings (e.g. "Hello, World!")
+Sequences:
+
+list (mutable ordered sequence)
+tuple (immutable ordered sequence)
+range (immutable sequence for iteration)
+Mappings:
+
+dict (associative arrays or dictionaries)
+Sets:
+
+set and frozenset (unordered collections of unique items)
+Boolean:
+
+bool (with values True and False)
+Since Python is dynamically typed, you simply assign values with the equals sign (=):
+
+python
+Copy
+Edit
+# Variable assignment with various data types
+age = 25               # int
+price = 19.99          # float
+greeting = "Hello"     # str
+colors = ["red", "green", "blue"]  # list
+person = {"name": "Alice", "age": 30}  # dict
+is_valid = True        # bool
+Reference: W3Schools Python Data Types (​
+W3SCHOOLS.COM
+) and Programiz (​
+PROGRAMIZ.COM
+)
+
+2. Input and Output
+Python provides simple built-in functions for interacting with the user:
+
+Input:
+Use the input() function to prompt the user and capture what they type. Note that input() returns a string, so you may need to convert it (see type conversion below).
+
+Output:
+Use the print() function to display text or variables.
+
+Example:
+
+python
+Copy
+Edit
+# Getting user input
+name = input("Enter your name: ")
+age_str = input("Enter your age: ")
+
+# Converting the age from string to integer
+age = int(age_str)
+
+# Displaying output
+print("Hello,", name)
+print("You are", age, "years old.")
+Reference: Basic input/output concepts are covered in tutorials on Programiz (​
+PROGRAMIZ.COM
+) and Real Python.
+
+3. Type Conversion
+Sometimes you need to change a value’s type explicitly (known as type casting) rather than relying on Python’s automatic (implicit) conversion. Use the built-in functions:
+
+int() to convert to an integer
+float() to convert to a floating‑point number
+str() to convert to a string
+list(), tuple(), etc., for other conversions
+Example:
+
+python
+Copy
+Edit
+# Converting a float to an integer (fractional part is truncated)
+x = 3.99
+x_int = int(x)         # x_int is 3
+
+# Converting a string to an integer (if the string is numeric)
+num_str = "42"
+num = int(num_str)     # num is 42
+
+# Converting a number to a string
+pi = 3.14159
+pi_str = str(pi)       # pi_str is "3.14159"
+
+print("Integer:", x_int)
+print("Converted number:", num)
+print("Pi as a string:", pi_str)
+Reference: See Programiz’s Python Data Type Conversion tutorial (​
+DATACAMP.COM
+) for more details.
+
+4. Comments and Documentation
+Comments allow you to explain your code; they are ignored during execution.
+
+Single-line comments:
+Use the hash symbol (#) before your comment.
+
+python
+Copy
+Edit
+# This is a single-line comment
+x = 10  # This comment follows code on the same line
+Multi-line comments:
+While Python has no dedicated multi-line comment syntax, you can use a block of consecutive single-line comments or use a triple‑quoted string (which can serve as a multi-line docstring if placed at the start of a module, class, or function).
+
+python
+Copy
+Edit
+"""
+This is a multi-line string that is used as a docstring.
+It explains the purpose of the module, class, or function.
+"""
+Documentation Strings (Docstrings):
+Docstrings are special multi-line strings that appear right after the definition of a function, method, class, or module. They document what the block of code does. For example:
+
+python
+Copy
+Edit
+def add(a, b):
+    """
+    Add two numbers and return the result.
+
+    Parameters:
+    a (int or float): The first number.
+    b (int or float): The second number.
+
+    Returns:
+    int or float: The sum of a and b.
+    """
+    return a + b
+
+# Calling the function and printing its result
+print(add(3, 4))
+Docstrings are accessible via the __doc__ attribute and are used by tools such as Sphinx to generate documentation.
+
+Reference: For an overview on commenting and documentation in Python, see tutorials on Real Python and Programiz (​
+PROGRAMIZ.COM
+).
