@@ -1,0 +1,177 @@
+1. Conditional Statements (if, elif, else)
+Conditional statements allow your program to make decisions based on conditions.
+
+Example:
+
+x = 10
+
+if x > 10:
+    print("Greater than 10")
+elif x == 10:
+    print("Equal to 10")
+else:
+    print("Less than 10")
+Output:
+Equal to 10
+
+2. Loops (for, while)
+Loops help in repeating a block of code multiple times.
+
+for Loop Example:
+
+for i in range(5):  # Loops from 0 to 4
+    print(i)
+Output:
+
+0  
+1  
+2  
+3  
+4  
+while Loop Example:
+
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+Output:
+
+
+0  
+1  
+2  
+3  
+4  
+3. Break and Continue
+break exits the loop completely.
+continue skips the current iteration and moves to the next one.
+Example (break and continue in a for loop):
+python
+
+for i in range(5):
+    if i == 3:
+        break  # Stops the loop when i is 3
+    print(i)
+Output:
+
+
+0  
+1  
+2  
+
+for i in range(5):
+    if i == 3:
+        continue  # Skips when i is 3
+    print(i)
+Output:
+ 1. Conditional Statements (if, elif, else)
+Conditional statements allow your program to make decisions based on conditions.
+
+Example:
+
+x = 10
+
+if x > 10:
+    print("Greater than 10")
+elif x == 10:
+    print("Equal to 10")
+else:
+    print("Less than 10")
+Output:
+Equal to 10
+
+2. Loops (for, while)
+Loops help in repeating a block of code multiple times.
+
+for Loop Example:
+python
+Copy
+Edit
+for i in range(5):  # Loops from 0 to 4
+    print(i)
+Output:
+
+0  
+1  
+2  
+3  
+4  
+while Loop Example:
+
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+Output:
+
+0  
+1  
+2  
+3  
+4 
+  
+3. Break and Continue
+break exits the loop completely.
+continue skips the current iteration and moves to the next one.
+Example (break and continue in a for loop):
+for i in range(5):
+    if i == 3:
+        break  # Stops the loop when i is 3
+    print(i)
+Output:
+
+
+0  
+1  
+2  
+
+  
+for i in range(5):
+    if i == 3:
+        continue  # Skips when i is 3
+    print(i)
+Output:
+
+
+0  
+1  
+2  
+4  
+4. 
+
+Nested Loops
+A loop inside another loop.
+
+Example:
+python
+Copy
+Edit
+for i in range(3):  # Outer loop
+    for j in range(2):  # Inner loop
+        print(f"i = {i}, j = {j}")
+Output:
+
+ini
+Copy
+Edit
+i = 0, j = 0  
+i = 0, j = 1  
+i = 1, j = 0  
+i = 1, j = 1  
+i = 2, j = 0  
+i = 2, j = 1  Nested Loops
+A loop inside another loop.
+
+Example:
+
+for i in range(3):  # Outer loop
+    for j in range(2):  # Inner loop
+        print(f"i = {i}, j = {j}")
+Output:
+
+i = 0, j = 0  
+i = 0, j = 1  
+i = 1, j = 0  
+i = 1, j = 1  
+i = 2, j = 0  
+i = 2, j = 1  
