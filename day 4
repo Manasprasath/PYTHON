@@ -1,0 +1,57 @@
+Python Functions: Key Concepts and Practice Questions
+1. Defining Functions
+A function is a reusable block of code that performs a specific task.
+
+ 
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Alice"))
+✅ Practice Question: Write a function that takes two numbers as input and returns their sum.
+
+2. Function Arguments and Return Values
+Functions can take inputs (arguments) and return outputs.
+
+ 
+def multiply(a, b):
+    return a * b
+
+result = multiply(3, 4)
+print(result)  # Output: 12
+✅ Practice Question: Create a function is_even(n) that returns True if a number is even and False otherwise.
+
+3. Default and Keyword Arguments
+Default arguments provide a default value if no argument is passed.
+Keyword arguments allow passing parameters in any order.
+ 
+def greet(name="Guest", message="Welcome!"):
+    return f"Hello {name}, {message}"
+
+print(greet())  # Uses default values
+print(greet("John"))  # Uses default message
+print(greet(message="Good Morning", name="Alice"))  # Keyword arguments
+✅ Practice Question: Write a function power(base, exponent=2) that returns base raised to exponent.
+
+4. Lambda Functions (Anonymous Functions)
+A lambda function is a small anonymous function with a single expression.
+
+ 
+square = lambda x: x * x
+print(square(5))  # Output: 25
+
+add = lambda a, b: a + b
+print(add(3, 7))  # Output: 10
+✅ Practice Question: Create a lambda function to check if a number is divisible by 3.
+
+5. Scope (Global vs Local Variables)
+Local variables exist only within the function.
+Global variables exist throughout the program.
+ 
+x = 10  # Global variable
+
+def my_function():
+    x = 5  # Local variable
+    print("Inside function:", x)
+
+my_function()
+print("Outside function:", x)
