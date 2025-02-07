@@ -1,0 +1,153 @@
+1. Lists: Creating, Accessing, and Modifying
+A list is an ordered, mutable (changeable) collection of items.
+
+Creating a List
+ 
+# Empty list
+my_list = []
+
+# List with elements
+fruits = ["apple", "banana", "cherry"]
+
+# Mixed data types
+mixed = [1, "hello", 3.5, True]
+Accessing List Elements
+ 
+fruits = ["apple", "banana", "cherry"]
+
+# Accessing by index (0-based)
+print(fruits[0])  # apple
+print(fruits[1])  # banana
+
+# Negative index (counts from end)
+print(fruits[-1])  # cherry
+
+# Slicing
+print(fruits[0:2])  # ['apple', 'banana']
+Modifying a List
+ 
+fruits[1] = "blueberry"  # Modifying an element
+print(fruits)  # ['apple', 'blueberry', 'cherry']
+
+# Adding elements
+fruits.append("orange")  # Adds to the end
+fruits.insert(1, "grape")  # Inserts at index 1
+
+# Removing elements
+fruits.remove("apple")  # Removes by value
+del fruits[0]  # Removes by index
+popped = fruits.pop()  # Removes last element
+2. Tuples: Immutable Collections
+A tuple is an ordered, immutable (unchangeable) collection of elements.
+
+Creating a Tuple
+ 
+# Empty tuple
+my_tuple = ()
+
+# Tuple with elements
+colors = ("red", "green", "blue")
+
+# Tuple with one element (must include a comma)
+single_element = ("hello",)
+Accessing Tuple Elements
+ 
+print(colors[0])  # red
+print(colors[-1])  # blue
+print(colors[1:])  # ('green', 'blue')
+Tuple Immutability
+Tuples cannot be modified after creation.
+
+ 
+colors[1] = "yellow"  # ❌ TypeError: 'tuple' object does not support item assignment
+Tuple Packing and Unpacking
+ 
+# Packing
+point = (10, 20)
+
+# Unpacking
+x, y = point
+print(x)  # 10
+print(y)  # 20
+3. Sets: Unique Elements Only
+A set is an unordered collection of unique elements.
+
+Creating a Set
+ 
+# Empty set (must use set(), not {})
+my_set = set()
+
+# Set with values
+numbers = {1, 2, 3, 4, 4, 5}  # Duplicate values are ignored
+print(numbers)  # {1, 2, 3, 4, 5}
+Adding and Removing Elements
+ 
+numbers.add(6)  # Adds an element
+numbers.remove(3)  # Removes element (raises error if not found)
+numbers.discard(7)  # Removes element (no error if not found)
+numbers.pop()  # Removes a random element
+numbers.clear()  # Removes all elements
+Set Operations
+ 
+A = {1, 2, 3, 4}
+B = {3, 4, 5, 6}
+
+# Union (combines elements)
+print(A | B)  # {1, 2, 3, 4, 5, 6}
+
+# Intersection (common elements)
+print(A & B)  # {3, 4}
+
+# Difference (elements in A but not in B)
+print(A - B)  # {1, 2}
+
+# Symmetric Difference (elements in A or B, but not both)
+print(A ^ B)  # {1, 2, 5, 6}
+4. Basic Operations on Lists, Tuples, and Sets
+List Operations
+ 
+# Concatenation
+list1 = [1, 2]
+list2 = [3, 4]
+print(list1 + list2)  # [1, 2, 3, 4]
+
+# Repeating
+print(list1 * 3)  # [1, 2, 1, 2, 1, 2]
+
+# Checking membership
+print(2 in list1)  # True
+
+# Length
+print(len(list1))  # 2
+Tuple Operations
+ 
+tuple1 = (1, 2, 3)
+tuple2 = (4, 5)
+
+# Concatenation
+print(tuple1 + tuple2)  # (1, 2, 3, 4, 5)
+
+# Repeating
+print(tuple1 * 2)  # (1, 2, 3, 1, 2, 3)
+
+# Checking membership
+print(2 in tuple1)  # True
+
+# Length
+print(len(tuple1))  # 3
+Set Operations
+ 
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+
+# Checking membership
+print(2 in set1)  # True
+
+# Length
+print(len(set1))  # 3
+Summary Table
+Feature	List	Tuple	Set
+Ordered	✅ Yes	✅ Yes	❌ No
+Mutable	✅ Yes (Can Modify)	❌ No (Immutable)	✅ Yes (Can Modify)
+Duplicates	✅ Allowed	✅ Allowed	❌ Not Allowed
+Indexing	✅ Yes	✅ Yes	❌ No (Unordered)
