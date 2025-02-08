@@ -1,0 +1,140 @@
+1. Dictionaries: Key-Value Pairs
+A dictionary is a collection of key-value pairs. It is unordered, mutable, and does not allow duplicate keys.
+
+Creating a Dictionary
+ 
+# Empty dictionary
+my_dict = {}
+
+# Dictionary with key-value pairs
+person = {
+    "name": "Alice",
+    "age": 25,
+    "city": "New York"
+}
+Accessing Dictionary Values
+ 
+print(person["name"])  # Alice
+
+# Using get() to avoid errors if the key is missing
+print(person.get("age"))  # 25
+print(person.get("salary", "Not Found"))  # Default value if key is missing
+Adding and Modifying Dictionary Elements
+ 
+person["age"] = 26  # Modify an existing key
+person["job"] = "Engineer"  # Add a new key
+print(person)
+Removing Dictionary Elements
+ 
+del person["city"]  # Removes a key
+job = person.pop("job")  # Removes and returns the value
+person.clear()  # Clears all key-value pairs
+2. Dictionary Methods: get(), update(), etc.
+Common Dictionary Methods
+ 
+data = {"name": "John", "age": 30}
+
+# get(): Returns value of a key (or a default value if the key is missing)
+print(data.get("age", "Not Found"))  # 30
+print(data.get("salary", "Not Available"))  # Not Available
+
+# update(): Updates the dictionary with another dictionary
+data.update({"age": 31, "city": "London"})
+print(data)  # {'name': 'John', 'age': 31, 'city': 'London'}
+
+# keys(): Returns a list of keys
+print(data.keys())  # dict_keys(['name', 'age', 'city'])
+
+# values(): Returns a list of values
+print(data.values())  # dict_values(['John', 31, 'London'])
+
+# items(): Returns key-value pairs as tuples
+print(data.items())  # dict_items([('name', 'John'), ('age', 31), ('city', 'London')])
+
+# pop(): Removes and returns the value of a key
+age = data.pop("age")
+print(age)  # 31
+3. List Comprehensions
+List comprehensions provide a concise way to create lists.
+
+Basic List Comprehension
+ 
+# Normal way
+squares = []
+for i in range(5):
+    squares.append(i ** 2)
+
+# Using list comprehension
+squares = [i ** 2 for i in range(5)]
+print(squares)  # [0, 1, 4, 9, 16]
+List Comprehension with Conditions
+ 
+# Get even numbers from 0 to 9
+evens = [i for i in range(10) if i % 2 == 0]
+print(evens)  # [0, 2, 4, 6, 8]
+
+# Convert lowercase letters to uppercase
+words = ["hello", "world", "python"]
+uppercase_words = [word.upper() for word in words]
+print(uppercase_words)  # ['HELLO', 'WORLD', 'PYTHON']
+Nested List Comprehension
+ 
+# Creating a 3x3 matrix
+matrix = [[i for i in range(3)] for j in range(3)]
+print(matrix)  # [[0, 1, 2], [0, 1, 2], [0, 1, 2]]
+4. Working with Strings and String Methods
+A string is an immutable sequence of characters.
+
+String Creation
+ 
+# Single-line strings
+text = "Hello, Python!"
+
+# Multi-line strings
+multiline_text = """This is 
+a multi-line string."""
+String Indexing and Slicing
+ 
+text = "Python"
+
+print(text[0])  # P (First character)
+print(text[-1])  # n (Last character)
+print(text[1:4])  # yth (Substring from index 1 to 3)
+print(text[::-1])  # Reverse the string: "nohtyP"
+Common String Methods
+ 
+s = "  hello world  "
+
+# strip(): Removes leading/trailing spaces
+print(s.strip())  # "hello world"
+
+# lower() and upper()
+print(s.lower())  # "  hello world  "
+print(s.upper())  # "  HELLO WORLD  "
+
+# replace(): Replaces parts of a string
+print(s.replace("hello", "hi"))  # "  hi world  "
+
+# split(): Splits a string into a list
+words = s.split()  # ["hello", "world"]
+
+# join(): Joins list elements into a string
+sentence = " ".join(words)  # "hello world"
+
+# find(): Finds index of first occurrence
+print(s.find("world"))  # 8
+
+# count(): Counts occurrences of a substring
+print(s.count("l"))  # 3
+
+# isdigit(), isalpha(), isalnum()
+print("123".isdigit())  # True
+print("abc".isalpha())  # True
+print("abc123".isalnum())  # True
+Summary Table
+Feature	Dictionaries	Lists	Strings
+Mutable	✅ Yes	✅ Yes	❌ No (Immutable)
+Ordered (Python 3.7+)	✅ Yes	✅ Yes	✅ Yes
+Duplicate Elements	❌ No (Unique Keys)	✅ Yes	✅ Yes
+Indexing	❌ No (Uses Keys)	✅ Yes (Uses Index)	✅ Yes (Uses Index)
+Best Use Case	Key-value mappings	Ordered collections	Text data
