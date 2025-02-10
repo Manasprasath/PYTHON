@@ -1,0 +1,194 @@
+Object-Oriented Programming (OOP) Advanced Concepts
+1. Inheritance
+Inheritance allows one class (child class) to acquire the properties and methods of another class (parent class). It helps in code reusability.
+
+Example of Single Inheritance
+  
+# Parent class
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return "Some sound"
+
+# Child class inheriting from Animal
+class Dog(Animal):
+    def speak(self):
+        return "Bark"
+
+# Creating objects
+dog = Dog("Buddy")
+print(dog.name)    # Buddy
+print(dog.speak()) # Bark
+🔹 The Dog class inherits the name attribute from Animal.
+🔹 It overrides the speak() method.
+
+Types of Inheritance in Python
+Single Inheritance → One parent, one child class.
+Multiple Inheritance → A class inherits from multiple parents.
+Multilevel Inheritance → Child inherits from another child class.
+Hierarchical Inheritance → Multiple child classes inherit from one parent.
+Hybrid Inheritance → Combination of different types.
+Example of Multiple Inheritance
+  
+class A:
+    def method_a(self):
+        return "A"
+
+class B:
+    def method_b(self):
+        return "B"
+
+# Class C inherits from both A and B
+class C(A, B):
+    def method_c(self):
+        return "C"
+
+obj = C()
+print(obj.method_a())  # A
+print(obj.method_b())  # B
+print(obj.method_c())  # C
+🔹 C inherits from both A and B.
+
+Example of Multilevel Inheritance
+  
+class Vehicle:
+    def start(self):
+        return "Vehicle started"
+
+class Car(Vehicle):
+    def drive(self):
+        return "Car is driving"
+
+class ElectricCar(Car):
+    def charge(self):
+        return "Charging battery"
+
+tesla = ElectricCar()
+print(tesla.start())  # Vehicle started
+print(tesla.drive())  # Car is driving
+print(tesla.charge()) # Charging battery
+🔹 ElectricCar inherits from Car, which inherits from Vehicle.
+
+2. Polymorphism
+Polymorphism means "many forms", allowing the same method name to have different implementations across classes.
+
+Method Overriding (Runtime Polymorphism)
+A child class can override a method from its parent class.
+
+  
+class Bird:
+    def speak(self):
+        return "Some sound"
+
+class Parrot(Bird):
+    def speak(self):
+        return "Squawk"
+
+class Crow(Bird):
+    def speak(self):
+        return "Caw"
+
+# Using the same method name
+parrot = Parrot()
+crow = Crow()
+print(parrot.speak()) # Squawk
+print(crow.speak())   # Caw
+🔹 Both Parrot and Crow override speak().
+
+Method Overloading (Not Directly Supported in Python)
+Python does not support method overloading directly, but we can achieve it using default arguments.
+
+  
+class Math:
+    def add(self, a, b, c=0):  # Default argument
+        return a + b + c
+
+obj = Math()
+print(obj.add(5, 10))    # 15
+print(obj.add(5, 10, 20)) # 35
+🔹 If c is not provided, it defaults to 0.
+
+Operator Overloading
+Python allows us to define the behavior of operators (+, -, *, etc.) using special methods.
+
+  
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):  # Overloading +
+        return Point(self.x + other.x, self.y + other.y)
+
+p1 = Point(2, 3)
+p2 = Point(4, 5)
+p3 = p1 + p2  # Calls __add__
+print(p3.x, p3.y)  # 6 8
+🔹 We customized the + operator for Point objects.
+
+3. Encapsulation (Getters and Setters)
+Encapsulation means restricting direct access to data and controlling it through methods.
+
+Private and Protected Attributes
+_protected → Convention for protected attributes (can be accessed, but not recommended).
+__private → Name-mangling makes it harder to access (but still possible).
+  
+class BankAccount:
+    def __init__(self, balance):
+        self._balance = balance  # Protected attribute
+
+    def get_balance(self):
+        return self._balance  # Getter
+
+    def set_balance(self, amount):
+        if amount >= 0:
+            self._balance = amount  # Setter
+        else:
+            print("Invalid amount")
+
+acc = BankAccount(500)
+print(acc.get_balance())  # 500
+
+acc.set_balance(1000)
+print(acc.get_balance())  # 1000
+
+acc.set_balance(-500)  # Invalid amount
+🔹 _balance is protected (can be accessed but should not be modified directly).
+🔹 get_balance() and set_balance() control access.
+
+Using Property Decorators (@property)
+A more Pythonic way to implement encapsulation.
+
+  
+class Person:
+    def __init__(self, name, age):
+        self._age = age  # Protected
+
+    @property
+    def age(self):  # Getter
+        return self._age
+
+    @age.setter
+    def age(self, value):  # Setter
+        if value > 0:
+            self._age = value
+        else:
+            print("Age must be positive")
+
+p = Person("Alice", 30)
+print(p.age)  # 30
+
+p.age = 35
+print(p.age)  # 35
+
+p.age = -5  # Age must be positive
+🔹 @property makes age readable like an attribute.
+🔹 @age.setter allows controlled modification.
+
+Summary
+Concept	Description	Example
+Inheritance	One class inherits attributes & methods from another	class Dog(Animal): ...
+Polymorphism	Same method name, different implementations	def speak(self): ... (overriding)
+Encapsulation	Restricting access using getters & setters	@property and @age.setter
