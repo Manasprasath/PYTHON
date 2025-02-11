@@ -1,0 +1,129 @@
+Working with Modules and Packages in Python
+Python provides a powerful module system that allows us to reuse code, organize programs, and work with third-party libraries efficiently.
+
+1. Importing Built-in Modules
+Python comes with many built-in modules that provide useful functions.
+
+Example: math Module
+The math module provides mathematical functions.
+
+  
+import math
+
+print(math.sqrt(25))   # 5.0
+print(math.pi)         # 3.141592653589793
+print(math.factorial(5)) # 120
+print(math.sin(math.radians(30)))  # 0.5
+Example: os Module
+The os module interacts with the operating system.
+
+  
+import os
+
+print(os.getcwd())  # Get current directory
+os.mkdir("new_folder")  # Create a new folder
+print(os.listdir())  # List files and directories
+Example: datetime Module
+Work with dates and times.
+
+  
+import datetime
+
+now = datetime.datetime.now()
+print(now)  # Current date and time
+
+print(now.strftime("%Y-%m-%d %H:%M:%S"))  # Format date
+Other Useful Modules
+random → Generate random numbers
+sys → System-specific parameters
+json → Handle JSON data
+re → Regular expressions
+2. Creating Custom Modules
+A module is simply a Python file (.py) that contains functions, classes, or variables.
+
+Step 1: Create a Custom Module
+Create a file named my_module.py:
+
+  
+# my_module.py
+
+def greet(name):
+    return f"Hello, {name}!"
+
+def add(a, b):
+    return a + b
+Step 2: Import and Use the Module
+  
+import my_module
+
+print(my_module.greet("Alice"))  # Hello, Alice!
+print(my_module.add(5, 10))  # 15
+Import Specific Functions
+  
+from my_module import greet
+
+print(greet("Bob"))  # Hello, Bob!
+Using as to Rename Imports
+  
+import my_module as mm
+
+print(mm.add(3, 7))  # 10
+3. Using pip to Install Packages
+Python uses pip (Python Package Installer) to install external libraries.
+
+Check if pip is Installed
+ 
+pip --version
+Install a Package (e.g., requests)
+ 
+pip install requests
+Use an Installed Package
+  
+import requests
+
+response = requests.get("https://api.github.com")
+print(response.status_code)  # 200
+List Installed Packages
+ 
+pip list
+Upgrade a Package
+ 
+pip install --upgrade requests
+Uninstall a Package
+ 
+pip uninstall requests
+Install from requirements.txt
+If you're working on a project with dependencies, install all required packages at once:
+
+ 
+pip install -r requirements.txt
+(The requirements.txt file should list packages, e.g., requests==2.26.0.)
+
+4. Setting Up Virtual Environments
+A virtual environment allows you to install packages in an isolated environment without affecting system-wide Python.
+
+Step 1: Install venv (If Not Installed)
+ 
+pip install virtualenv
+Step 2: Create a Virtual Environment
+ 
+python -m venv myenv
+Step 3: Activate the Virtual Environment
+Windows (Command Prompt)
+ 
+myenv\Scripts\activate
+Mac/Linux
+ 
+source myenv/bin/activate
+Step 4: Install Packages Inside Virtual Environment
+ 
+pip install numpy
+Step 5: Deactivate the Virtual Environment
+ 
+deactivate
+Summary
+Concept	Description	Example
+Built-in Modules	Pre-installed modules	import math
+Custom Modules	User-defined .py files	import my_module
+Installing Packages	Use pip to install libraries	pip install requests
+Virtual Environments	Isolate dependencies	python -m venv myenv
