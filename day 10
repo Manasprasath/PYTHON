@@ -1,0 +1,173 @@
+File Handling, CSV, JSON, and Error Handling in Python
+Python provides powerful tools for working with files, handling structured data formats like CSV and JSON, and managing errors using exception handling.
+
+1. Reading and Writing Files
+Opening a File (open() function)
+Python uses the open() function to work with files.
+
+ 
+file = open("example.txt", "r")  # Open in read mode
+File Modes
+Mode	Description
+"r"	Read (default)
+"w"	Write (overwrites existing content)
+"a"	Append (adds content to the end)
+"x"	Create a new file (fails if file exists)
+"b"	Binary mode (e.g., images, videos)
+Reading a File
+ 
+with open("example.txt", "r") as file:
+    content = file.read()  # Reads the entire file
+    print(content)
+🔹 Using with open(...) ensures the file is properly closed after use.
+
+Reading Line by Line
+ 
+with open("example.txt", "r") as file:
+    for line in file:
+        print(line.strip())  # Strip removes trailing newlines
+Reading as a List
+ 
+with open("example.txt", "r") as file:
+    lines = file.readlines()  # Returns a list of lines
+    print(lines)
+Writing to a File
+Writing ("w" mode) – Overwrites content
+ 
+with open("example.txt", "w") as file:
+    file.write("Hello, World!\n")
+    file.write("Welcome to Python file handling.")
+🔹 If example.txt already exists, it will be overwritten.
+
+Appending ("a" mode) – Adds new content
+ 
+with open("example.txt", "a") as file:
+    file.write("\nAppending a new line!")
+🔹 Opens the file in append mode, so existing content is preserved.
+
+2. Working with CSV Files
+CSV (Comma-Separated Values) files store tabular data.
+
+Reading a CSV File
+ 
+import csv
+
+with open("data.csv", "r") as file:
+    reader = csv.reader(file)  # Create a reader object
+    for row in reader:
+        print(row)  # Each row is a list
+Reading CSV with Headers (DictReader)
+ 
+with open("data.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(row["Name"], row["Age"])  # Access by column name
+Writing a CSV File
+ 
+with open("data.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Name", "Age"])  # Write header
+    writer.writerow(["Alice", 25])    # Write data
+    writer.writerow(["Bob", 30])
+Writing CSV with Headers (DictWriter)
+ 
+with open("data.csv", "w", newline="") as file:
+    fieldnames = ["Name", "Age"]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    
+    writer.writeheader()  # Write column headers
+    writer.writerow({"Name": "Alice", "Age": 25})
+    writer.writerow({"Name": "Bob", "Age": 30})
+3. Working with JSON Files
+JSON (JavaScript Object Notation) is a lightweight format for data exchange.
+
+Reading a JSON File
+ 
+import json
+
+with open("data.json", "r") as file:
+    data = json.load(file)  # Load JSON into a Python dictionary
+    print(data)
+🔹 json.load(file) converts JSON into a Python dictionary.
+
+Writing a JSON File
+ 
+data = {
+    "name": "Alice",
+    "age": 25,
+    "city": "New York"
+}
+
+with open("data.json", "w") as file:
+    json.dump(data, file, indent=4)  # Pretty format with indentation
+🔹 json.dump(data, file) writes JSON to a file.
+🔹 indent=4 makes the JSON more readable.
+
+Converting Between JSON and Python Dictionary
+ 
+json_str = '{"name": "Bob", "age": 30, "city": "London"}'
+
+# Convert JSON string to Python dictionary
+data = json.loads(json_str)
+print(data["name"])  # Bob
+
+# Convert Python dictionary to JSON string
+json_output = json.dumps(data, indent=4)
+print(json_output)
+4. Error Handling in Python
+Errors can cause a program to crash. Exception handling helps prevent this.
+
+Using try and except
+ 
+try:
+    num = int(input("Enter a number: "))
+    result = 10 / num
+    print("Result:", result)
+except ValueError:
+    print("Invalid input! Please enter a number.")
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero.")
+🔹 try → Code that may cause an error.
+🔹 except → Handles specific errors.
+
+Handling Multiple Exceptions
+ 
+try:
+    num = int(input("Enter a number: "))
+    result = 10 / num
+except (ValueError, ZeroDivisionError) as e:
+    print("Error:", e)
+🔹 Multiple exceptions can be handled in a single except.
+
+Using finally
+The finally block always executes, even if an error occurs.
+
+ 
+try:
+    file = open("example.txt", "r")
+    content = file.read()
+except FileNotFoundError:
+    print("File not found!")
+finally:
+    file.close()  # Ensures the file is closed
+🔹 Use finally to clean up resources (e.g., closing files).
+
+Raising Custom Exceptions
+ 
+def set_age(age):
+    if age < 0:
+        raise ValueError("Age cannot be negative")
+    return age
+
+try:
+    set_age(-5)
+except ValueError as e:
+    print("Exception:", e)
+🔹 raise manually throws an exception.
+
+5. Summary
+Concept	Description	Example
+File Handling	Read & write files using open()	file.read(), file.write()
+CSV Files	Read/write structured data	csv.reader(), csv.writer()
+JSON Files	Handle structured data	json.load(), json.dump()
+Error Handling	Manage exceptions gracefully	try-except-finally
