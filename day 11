@@ -1,0 +1,159 @@
+Advanced Python Topics: Decorators, Generators, and Context Managers
+Python provides powerful tools like decorators, generators, and context managers to improve code readability, efficiency, and maintainability.
+
+1. Decorators
+A decorator is a function that modifies another function without changing its structure.
+
+Basic Decorator Example
+ 
+def decorator_function(original_function):
+    def wrapper_function():
+        print("Wrapper executed before", original_function.__name__)
+        return original_function()
+    return wrapper_function
+
+@decorator_function  # Applying the decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+🔹 @decorator_function modifies say_hello().
+🔹 The wrapper_function() runs before say_hello().
+
+Decorator with Arguments
+ 
+def repeat(n):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for _ in range(n):
+                func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@repeat(3)  # Run the function 3 times
+def greet():
+    print("Hello!")
+
+greet()
+🔹 The repeat(n) decorator runs greet() 3 times.
+
+Real-World Example: Logging Decorator
+ 
+def log_function(func):
+    def wrapper(*args, **kwargs):
+        print(f"Executing {func.__name__} with arguments {args}, {kwargs}")
+        result = func(*args, **kwargs)
+        print(f"{func.__name__} returned {result}")
+        return result
+    return wrapper
+
+@log_function
+def add(a, b):
+    return a + b
+
+add(5, 10)
+🔹 Logs the function name, arguments, and return value.
+
+2. Generators
+A generator is a function that yields values lazily, using the yield keyword.
+
+Basic Generator Example
+ 
+def my_generator():
+    yield 1
+    yield 2
+    yield 3
+
+gen = my_generator()
+print(next(gen))  # 1
+print(next(gen))  # 2
+print(next(gen))  # 3
+🔹 yield pauses function execution and remembers its state.
+🔹 Use next(gen) to get values one by one.
+
+Generator for Infinite Sequence
+ 
+def count_up(start):
+    while True:
+        yield start
+        start += 1
+
+gen = count_up(5)
+print(next(gen))  # 5
+print(next(gen))  # 6
+print(next(gen))  # 7
+🔹 Unlike a normal function, this does not store all values in memory.
+
+Using Generators with for Loop
+ 
+def squares(n):
+    for i in range(n):
+        yield i ** 2
+
+for num in squares(5):
+    print(num)
+🔹 Generators are memory-efficient and work well with large datasets.
+
+Real-World Example: File Reading Generator
+ 
+def read_large_file(file_path):
+    with open(file_path, "r") as file:
+        for line in file:
+            yield line.strip()
+
+for line in read_large_file("big_data.txt"):
+    print(line)
+🔹 Reads large files line by line, avoiding memory overload.
+
+3. Context Managers (with Statement)
+Context managers handle resource management (like file handling) using the with statement.
+
+Basic Example: File Handling
+ 
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)
+🔹 Automatically closes the file after exiting the block.
+
+Creating a Custom Context Manager
+ 
+class FileManager:
+    def __init__(self, filename, mode):
+        self.filename = filename
+        self.mode = mode
+
+    def __enter__(self):
+        self.file = open(self.filename, self.mode)
+        return self.file
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.file.close()
+        print("File closed")
+
+with FileManager("sample.txt", "w") as f:
+    f.write("Hello, world!")
+🔹 __enter__() opens the resource.
+🔹 __exit__() closes it, even if an error occurs.
+
+Using contextlib for Simpler Context Managers
+ 
+from contextlib import contextmanager
+
+@contextmanager
+def open_file(file, mode):
+    f = open(file, mode)
+    try:
+        yield f
+    finally:
+        f.close()
+        print("File closed")
+
+with open_file("test.txt", "w") as f:
+    f.write("Hello!")
+🔹 @contextmanager makes it easier to create custom context managers.
+
+4. Summary
+Feature	Description	Example
+Decorators	Modify functions without changing them	@log_function
+Generators	Yield values lazily, memory-efficient	yield
+Context Managers	Manage resources automatically	with open(...)
