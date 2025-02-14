@@ -1,0 +1,72 @@
+Regular Expressions in Python (re Module)
+Regular expressions (regex) are patterns used to match, search, and manipulate text. Python provides the re module for handling regex operations.
+
+1. Importing re Module
+ 
+import re
+🔹 The re module provides functions to work with regex.
+
+2. Basic Regex Functions in Python
+Function	Description
+re.match(pattern, string)	Checks if the pattern matches from the beginning of the string
+re.search(pattern, string)	Searches for first occurrence of the pattern in the string
+re.findall(pattern, string)	Finds all matches and returns a list
+re.finditer(pattern, string)	Finds all matches and returns an iterator of match objects
+re.sub(pattern, replacement, string)	Replaces matches with a replacement string
+3. Common Regex Patterns
+Pattern	Meaning	Example
+\d	Digit (0-9)	"a1b2" → ["1", "2"]
+\D	Non-digit	"123abc" → ["a", "b", "c"]
+\w	Word character (letters, digits, _)	"Hello_123" → ["H", "e", "l", "l", "o", "_", "1", "2", "3"]
+\W	Non-word character	"Hi! #Python" → ["!", " ", "#"]
+\s	Whitespace (space, tab, newline)	"Hello World" → [" ", "\n"]
+\S	Non-whitespace	" A B " → ["A", "B"]
+.	Any character except newline	"abc" → ["a", "b", "c"]
+^	Start of string	^Hello matches "Hello world" but not "Hi Hello"
+$	End of string	world$ matches "Hello world" but not "world Hello"
+a*	0 or more occurrences of a	"aaab" → ["aaa"]
+a+	1 or more occurrences of a	"aaab" → ["aaa"]
+a?	0 or 1 occurrence of a	"ab" → ["a"]
+a{3}	Exactly 3 occurrences of a	"aaaa" → ["aaa"]
+a{2,4}	Between 2 to 4 occurrences of a	"aaaa" → ["aaaa"]
+4. Email Validation with Regex
+To validate emails, we can use:
+
+Letters, digits, dots (.), underscores (_), and hyphens (-) before @
+A valid domain after @
+A domain extension (e.g., .com, .org)
+Example: Checking If an Email Is Valid
+ 
+import re
+
+def validate_email(email):
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    return bool(re.match(pattern, email))
+
+# Test Cases
+emails = ["user@example.com", "invalid@.com", "hello@domain.co", "user@com"]
+for email in emails:
+    print(f"{email}: {'Valid' if validate_email(email) else 'Invalid'}")
+🔹 This regex ensures: ✅ The email starts with letters, digits, _, -, %, +, or .
+✅ It contains @, followed by a domain name
+✅ Ends with a dot (.) and domain extension (2+ letters)
+
+5. Extracting Emails from a Text
+ 
+text = "Contact us at support@example.com or sales@shop.com."
+emails = re.findall(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", text)
+print(emails)  # ['support@example.com', 'sales@shop.com']
+🔹 re.findall() returns all email addresses.
+
+6. Replacing Emails with a Placeholder
+ 
+text = "Email me at john.doe@gmail.com for details."
+masked_text = re.sub(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", "[REDACTED]", text)
+print(masked_text)  # "Email me at [REDACTED] for details."
+🔹 re.sub() replaces emails with [REDACTED].
+
+7. Summary
+Operation	Regex	Example
+Check Email Validity	^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$	"user@example.com" ✅
+Extract Emails from Text	[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}	"email@domain.com"
+Replace Emails in Text	re.sub(pattern, "[REDACTED]", text)	"Hidden Email"
