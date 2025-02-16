@@ -1,0 +1,150 @@
+Data Analysis with Pandas & Data Visualization with Matplotlib/Seaborn
+1. Filtering and Sorting Data with Pandas
+Filtering Data in Pandas
+Pandas allows filtering rows based on conditions using boolean indexing.
+
+Example: Filtering Rows Based on Conditions
+ 
+import pandas as pd
+
+# Sample Data
+data = {
+    "Name": ["Alice", "Bob", "Charlie", "David"],
+    "Age": [25, 30, 35, 28],
+    "City": ["New York", "London", "Paris", "Berlin"],
+    "Salary": [50000, 60000, 70000, 65000]
+}
+
+df = pd.DataFrame(data)
+
+# Filtering: Select employees with Salary > 60,000
+high_salary = df[df["Salary"] > 60000]
+print(high_salary)
+🔹 Boolean indexing selects rows where the condition is True.
+
+Filtering with Multiple Conditions
+ 
+filtered_df = df[(df["Age"] > 28) & (df["Salary"] > 60000)]
+print(filtered_df)
+🔹 Use & for AND and | for OR conditions.
+
+Sorting Data
+Use sort_values() to sort by ascending or descending order.
+
+ 
+# Sort by Salary in descending order
+sorted_df = df.sort_values("Salary", ascending=False)
+print(sorted_df)
+🔹 Multiple sorting:
+
+ 
+# Sort by Age (ascending) and Salary (descending)
+sorted_df = df.sort_values(["Age", "Salary"], ascending=[True, False])
+print(sorted_df)
+2. Grouping and Aggregation in Pandas
+Pandas provides groupby() for grouping data and applying aggregate functions.
+
+Example: Grouping by a Column
+ 
+data = {
+    "Department": ["HR", "IT", "IT", "HR", "Finance", "Finance"],
+    "Employee": ["Alice", "Bob", "Charlie", "David", "Eve", "Frank"],
+    "Salary": [50000, 70000, 75000, 48000, 90000, 88000]
+}
+
+df = pd.DataFrame(data)
+
+# Group by Department and calculate the average salary
+grouped_df = df.groupby("Department")["Salary"].mean()
+print(grouped_df)
+🔹 groupby("column") groups the DataFrame by a column.
+🔹 Aggregation functions like .mean(), .sum(), .count() can be applied.
+
+Multiple Aggregations using .agg()
+ 
+agg_df = df.groupby("Department")["Salary"].agg(["mean", "max", "min"])
+print(agg_df)
+🔹 agg() applies multiple functions at once.
+
+3. Data Visualization with Matplotlib and Seaborn
+matplotlib and seaborn are used for data visualization.
+
+Installing Matplotlib and Seaborn
+bash
+Copy
+Edit
+pip install matplotlib seaborn
+Importing Matplotlib and Seaborn
+ 
+import matplotlib.pyplot as plt
+import seaborn as sns
+4. Plotting with Matplotlib
+Matplotlib provides functions to create basic plots.
+
+Line Plot
+ 
+x = [1, 2, 3, 4, 5]
+y = [10, 15, 7, 12, 17]
+
+plt.plot(x, y, marker="o", linestyle="--", color="r")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.title("Line Plot Example")
+plt.show()
+🔹 plot() creates a line graph.
+🔹 marker="o" adds points on the line.
+🔹 linestyle="--" makes the line dashed.
+
+Bar Plot
+ 
+names = ["Alice", "Bob", "Charlie"]
+salaries = [50000, 60000, 70000]
+
+plt.bar(names, salaries, color="blue")
+plt.xlabel("Employees")
+plt.ylabel("Salary")
+plt.title("Salary Distribution")
+plt.show()
+🔹 bar() creates a bar chart.
+
+Histogram (Data Distribution)
+ 
+ages = [22, 25, 30, 22, 27, 35, 40, 30, 29, 25, 22, 23]
+
+plt.hist(ages, bins=5, color="green", edgecolor="black")
+plt.xlabel("Age")
+plt.ylabel("Count")
+plt.title("Age Distribution Histogram")
+plt.show()
+🔹 hist() shows the distribution of values.
+
+5. Plotting with Seaborn
+Seaborn provides advanced, visually appealing plots.
+
+Seaborn Bar Plot
+ 
+sns.barplot(x="Department", y="Salary", data=df)
+plt.title("Average Salary by Department")
+plt.show()
+🔹 Seaborn automatically groups and aggregates data.
+
+Seaborn Box Plot (Detecting Outliers)
+ 
+sns.boxplot(x=df["Salary"])
+plt.title("Salary Distribution")
+plt.show()
+🔹 Box plots help visualize median, quartiles, and outliers.
+
+Seaborn Scatter Plot (Correlation between Two Variables)
+ 
+sns.scatterplot(x="Age", y="Salary", data=df)
+plt.title("Age vs Salary")
+plt.show()
+🔹 Scatter plots show relationships between two variables.
+
+6. Summary
+Feature	Pandas	Matplotlib	Seaborn
+Filtering & Sorting	df[df["col"] > value], sort_values()	❌	❌
+Grouping & Aggregation	groupby(), agg()	❌	❌
+Basic Plotting	❌	plot(), bar(), hist()	✅ (bar, scatter, box)
+Advanced Visualization	❌	❌	sns.barplot(), sns.boxplot()
