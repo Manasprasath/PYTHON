@@ -1,0 +1,109 @@
+Web Development with Python 🌐
+Python provides two major frameworks for web development:
+✅ Flask – Lightweight and simple.
+✅ Django – Full-featured and scalable.
+
+1. Introduction to Flask and Django
+Flask: A Lightweight Web Framework
+Flask is a micro-framework for building simple web applications quickly.
+
+Installing Flask
+bash
+Copy
+Edit
+pip install flask
+Basic Flask App
+ 
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Hello, Flask!"
+
+if __name__ == "__main__":
+    app.run(debug=True)
+🔹 @app.route("/") defines the homepage.
+🔹 app.run(debug=True) enables auto-reload during development.
+
+Django: A Full-Featured Web Framework
+Django is a high-level framework designed for large applications.
+
+Installing Django
+bash
+Copy
+Edit
+pip install django
+Creating a Django Project
+bash
+Copy
+Edit
+django-admin startproject myproject
+cd myproject
+python manage.py runserver
+🔹 Runs the Django development server at http://127.0.0.1:8000/.
+
+Creating a Django App
+bash
+Copy
+Edit
+python manage.py startapp myapp
+🔹 Django projects are divided into multiple apps.
+
+2. Building a Simple Web App with Flask
+Handling Routes and Templates
+ 
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
+🔹 render_template() renders HTML files from a templates folder.
+
+Sample index.html File (Place in templates/)
+html
+Copy
+Edit
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask App</title>
+</head>
+<body>
+    <h1>Welcome to Flask!</h1>
+</body>
+</html>
+3. Handling Requests and Responses in Flask
+Handling GET and POST Requests
+ 
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route("/submit", methods=["GET", "POST"])
+def submit():
+    if request.method == "POST":
+        name = request.form["name"]
+        return f"Hello, {name}!"
+    return '''
+        <form method="post">
+            Name: <input type="text" name="name">
+            <input type="submit">
+        </form>
+    '''
+
+if __name__ == "__main__":
+    app.run(debug=True)
+🔹 GET requests load the form, POST requests process the form submission.
+
+4. Summary: Flask vs Django
+Feature	Flask	Django
+Complexity	Simple	Full-featured
+Flexibility	High	Predefined structure
+Use Case	Small projects, APIs	Large applications
