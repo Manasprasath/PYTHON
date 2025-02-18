@@ -1,0 +1,91 @@
+Python for Automation (Part 1) 🚀
+Automation helps save time by handling repetitive tasks with Python. In this part, we will explore:
+✅ File and Folder Automation using os and shutil
+✅ Automating Emails with smtplib
+
+1. Automating Tasks with os and shutil
+Working with Files and Directories using os
+The os module allows interaction with the operating system (e.g., creating, renaming, deleting files and folders).
+
+Getting the Current Working Directory
+ 
+import os
+print(os.getcwd())  # Prints the current directory
+Listing Files in a Directory
+ 
+files = os.listdir()  # Lists all files in the current directory
+print(files)
+Creating a New Directory
+ 
+os.mkdir("new_folder")  # Creates a folder named "new_folder"
+Renaming a File or Folder
+ 
+os.rename("old_file.txt", "new_file.txt")
+Deleting a File
+ 
+os.remove("file_to_delete.txt")  # Deletes a specific file
+Checking if a File or Folder Exists
+ 
+if os.path.exists("new_folder"):
+    print("Folder exists!")
+Copying, Moving, and Deleting Files with shutil
+The shutil module is useful for managing files and folders.
+
+Copy a File
+ 
+import shutil
+shutil.copy("source.txt", "destination.txt")  # Copies a file
+Move a File
+ 
+shutil.move("file.txt", "new_folder/")
+Delete a Folder
+ 
+shutil.rmtree("folder_to_delete")  # Deletes a folder and its contents
+🔹 Warning: rmtree() permanently deletes the folder!
+
+2. Automating Email with smtplib
+Sending an Email using Gmail SMTP
+The smtplib module allows sending emails using Simple Mail Transfer Protocol (SMTP).
+
+Step 1: Enable "Less Secure Apps" in Gmail
+To send emails via Gmail SMTP, you need to allow "Less Secure Apps" OR use an App Password.
+
+Step 2: Python Code for Sending an Email
+ 
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+# Email Configuration
+sender_email = "your_email@gmail.com"
+receiver_email = "recipient_email@gmail.com"
+password = "your_password"
+
+# Creating Email Message
+msg = MIMEMultipart()
+msg["From"] = sender_email
+msg["To"] = receiver_email
+msg["Subject"] = "Automated Email from Python"
+
+# Email Body
+body = "Hello! This is an automated email sent using Python."
+msg.attach(MIMEText(body, "plain"))
+
+# Sending Email
+try:
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()  # Secure the connection
+    server.login(sender_email, password)
+    server.sendmail(sender_email, receiver_email, msg.as_string())
+    server.quit()
+    print("Email sent successfully!")
+except Exception as e:
+    print("Error:", e)
+🔹 Use Environment Variables for email credentials instead of hardcoding passwords.
+🔹 For Outlook or Yahoo, change the SMTP server settings accordingly.
+
+Summary
+Feature	Module	Purpose
+File Management	os	Create, rename, delete files & folders
+File Operations	shutil	Copy, move, delete folders & files
+Email Automation	smtplib	Send emails via SMTP
