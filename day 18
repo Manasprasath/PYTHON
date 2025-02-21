@@ -1,0 +1,123 @@
+Python for APIs 🚀
+APIs (Application Programming Interfaces) allow applications to communicate. In this part, we'll cover:
+✅ Consuming APIs with requests
+✅ Parsing JSON responses
+✅ Building an API with Flask
+
+1. Consuming APIs with requests
+The requests module allows us to send HTTP requests easily.
+
+Install requests (if not installed)
+ 
+pip install requests
+Making a GET Request
+ 
+import requests
+
+response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+print(response.status_code)  # 200 (OK)
+print(response.text)  # Raw response
+🔹 response.status_code → Shows HTTP status (200 = success, 404 = not found).
+🔹 response.text → Shows raw response content.
+
+2. Parsing JSON Responses
+APIs often return data in JSON format, which can be parsed using .json().
+
+Parsing JSON Data
+ 
+import requests
+
+response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+
+# Convert response to JSON
+data = response.json()
+
+# Extract specific fields
+print("Title:", data["title"])
+print("Body:", data["body"])
+🔹 response.json() → Converts API response into a Python dictionary.
+
+3. Sending Data with a POST Request
+Example: Creating a New Post
+ 
+import requests
+
+url = "https://jsonplaceholder.typicode.com/posts"
+payload = {
+    "title": "My New Post",
+    "body": "This is the content of the post.",
+    "userId": 1
+}
+
+response = requests.post(url, json=payload)
+
+print(response.status_code)  # 201 (Created)
+print(response.json())  # Response data
+🔹 requests.post(url, json=payload) sends JSON data to the API.
+🔹 HTTP Methods:
+
+GET → Retrieve data
+POST → Send new data
+PUT → Update existing data
+DELETE → Remove data
+4. Building Your Own API with Flask
+Flask makes it easy to create a simple API.
+
+Step 1: Install Flask (if not installed)
+ 
+pip install flask
+Step 2: Create a Simple API
+ 
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# Sample data
+posts = [
+    {"id": 1, "title": "First Post", "body": "This is the first post"},
+    {"id": 2, "title": "Second Post", "body": "This is the second post"}
+]
+
+# GET: Retrieve all posts
+@app.route("/posts", methods=["GET"])
+def get_posts():
+    return jsonify(posts)
+
+# GET: Retrieve a single post by ID
+@app.route("/posts/<int:post_id>", methods=["GET"])
+def get_post(post_id):
+    post = next((p for p in posts if p["id"] == post_id), None)
+    return jsonify(post) if post else ("Post not found", 404)
+
+# POST: Create a new post
+@app.route("/posts", methods=["POST"])
+def create_post():
+    data = request.json
+    new_post = {"id": len(posts) + 1, "title": data["title"], "body": data["body"]}
+    posts.append(new_post)
+    return jsonify(new_post), 201
+
+if __name__ == "__main__":
+    app.run(debug=True)
+🔹 Run the API:
+
+ 
+python app.py
+🔹 Test API in Postman or Browser:
+
+GET all posts → http://127.0.0.1:5000/posts
+GET post by ID → http://127.0.0.1:5000/posts/1
+POST new post → Use Postman with raw JSON:
+json
+Copy
+Edit
+{
+  "title": "New Post",
+  "body": "This is the new post content"
+}
+5. Summary
+Feature	Method	Example
+Fetch Data	requests.get()	requests.get(url)
+Send Data	requests.post()	requests.post(url, json=data)
+JSON Parsing	.json()	response.json()
+Create API	Flask	@app.route("/posts")
