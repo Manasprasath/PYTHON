@@ -1,0 +1,127 @@
+Python Testing & Debugging 🚀
+Writing clean and reliable code requires testing, debugging, and logging. In this part, we'll cover:
+✅ Writing Unit Tests with unittest and pytest
+✅ Debugging Tips
+✅ Logging with the logging module
+
+1. Writing Unit Tests with unittest
+Python’s built-in unittest module allows us to write test cases for our functions.
+
+Basic Example: Testing a Function
+ 
+import unittest
+
+# Function to test
+def add(a, b):
+    return a + b
+
+# Test Case
+class TestMathOperations(unittest.TestCase):
+    def test_add(self):
+        self.assertEqual(add(2, 3), 5)
+        self.assertEqual(add(-1, 1), 0)
+        self.assertEqual(add(0, 0), 0)
+
+# Run the tests
+if __name__ == "__main__":
+    unittest.main()
+🔹 self.assertEqual(actual, expected) checks if values match.
+🔹 Run the test:
+
+bash
+Copy
+Edit
+python test_script.py
+2. Writing Tests with pytest (Simpler Alternative)
+pytest is a more flexible and concise testing framework.
+
+Install pytest (if not installed)
+bash
+Copy
+Edit
+pip install pytest
+Example: Testing a Function with pytest
+ 
+# Function to test
+def multiply(a, b):
+    return a * b
+
+# Test Case
+def test_multiply():
+    assert multiply(2, 3) == 6
+    assert multiply(-1, 5) == -5
+    assert multiply(0, 100) == 0
+🔹 Run tests with:
+
+bash
+Copy
+Edit
+pytest test_script.py
+🔹 Advantages of pytest:
+✔ No need for classes
+✔ Better error messages
+
+3. Debugging Tips
+🔍 1. Use print() for Quick Debugging
+
+ 
+x = 10
+print(f"Value of x: {x}")  # Debugging output
+🔍 2. Use pdb (Python Debugger)
+
+ 
+import pdb
+
+def divide(a, b):
+    pdb.set_trace()  # Debugging Breakpoint
+    return a / b
+
+result = divide(10, 2)
+🔹 Inside the debugger:
+
+n → Next line
+p variable → Print variable
+c → Continue execution
+🔍 3. Debug in VS Code or PyCharm
+
+Set breakpoints in the editor
+Step through the code
+4. Logging with the logging Module
+Instead of using print(), use logging for better control over messages.
+
+Basic Logging Example
+ 
+import logging
+
+logging.basicConfig(level=logging.DEBUG)  # Set log level
+
+logging.debug("This is a debug message")
+logging.info("This is an info message")
+logging.warning("This is a warning message")
+logging.error("This is an error message")
+logging.critical("This is a critical error")
+🔹 Log Levels:
+
+Level	Purpose
+DEBUG	Detailed debugging info
+INFO	General info messages
+WARNING	Something unexpected happened
+ERROR	A serious error occurred
+CRITICAL	Program may crash
+Logging to a File
+ 
+logging.basicConfig(filename="app.log", level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
+logging.info("Application started")
+🔹 Log file (app.log):
+
+yaml
+Copy
+Edit
+2025-02-06 12:34:56 - INFO - Application started
+5. Summary
+Feature	Module	Example
+Unit Testing	unittest	unittest.TestCase
+Simple Testing	pytest	assert function() == expected
+Debugging	pdb	pdb.set_trace()
+Logging	logging	logging.info("Message")
