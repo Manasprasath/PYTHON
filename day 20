@@ -1,0 +1,122 @@
+🚀 Advanced Python Concepts
+In this section, we’ll cover:
+✅ Threads and Multiprocessing (Parallel & Concurrent Execution)
+✅ Asynchronous Programming with asyncio
+✅ Performance Optimization (cProfile, timeit)
+
+1. Working with Threads and Multiprocessing
+Python provides multithreading for I/O-bound tasks and multiprocessing for CPU-bound tasks.
+
+🧵 Using threading (Multithreading for I/O-bound tasks)
+For tasks like web scraping, file I/O, and network requests.
+
+ 
+import threading
+import time
+
+def print_numbers():
+    for i in range(1, 6):
+        time.sleep(1)
+        print(f"Number: {i}")
+
+# Creating two threads
+thread1 = threading.Thread(target=print_numbers)
+thread2 = threading.Thread(target=print_numbers)
+
+# Start threads
+thread1.start()
+thread2.start()
+
+# Wait for both threads to finish
+thread1.join()
+thread2.join()
+
+print("Both threads finished!")
+🔹 Threads run concurrently but share the same memory.
+🔹 Ideal for network calls, I/O tasks.
+
+🖥️ Using multiprocessing (For CPU-bound tasks)
+For tasks like heavy computations, image processing, and ML training.
+
+ 
+import multiprocessing
+
+def square_number(n):
+    return n * n
+
+if __name__ == "__main__":
+    numbers = [1, 2, 3, 4, 5]
+    
+    with multiprocessing.Pool(processes=2) as pool:
+        results = pool.map(square_number, numbers)
+
+    print("Squared Numbers:", results)
+🔹 Multiprocessing uses multiple CPU cores → Faster for heavy computations.
+🔹 Each process runs independently (no shared memory issues).
+
+2. Asynchronous Programming with asyncio
+asyncio is used for handling multiple tasks without blocking execution (great for web scraping, APIs).
+
+Basic Example: Running Two Async Functions
+ 
+import asyncio
+
+async def task_1():
+    print("Task 1: Start")
+    await asyncio.sleep(2)  # Simulate I/O task
+    print("Task 1: Done")
+
+async def task_2():
+    print("Task 2: Start")
+    await asyncio.sleep(1)
+    print("Task 2: Done")
+
+async def main():
+    await asyncio.gather(task_1(), task_2())  # Run tasks concurrently
+
+asyncio.run(main())
+🔹 await asyncio.sleep(2) → Simulates an async I/O operation.
+🔹 asyncio.gather(task_1(), task_2()) → Runs tasks concurrently.
+
+When to Use Each Approach?
+Use Case	Recommended Approach
+Web Scraping, I/O-bound tasks	threading or asyncio
+Heavy computations, CPU-bound tasks	multiprocessing
+Handling thousands of concurrent requests	asyncio
+3. Performance Optimization in Python
+⏳ Using timeit for Speed Measurement
+Used for benchmarking small code snippets.
+
+ 
+import timeit
+
+code_snippet = """
+result = [x**2 for x in range(1000)]
+"""
+
+execution_time = timeit.timeit(code_snippet, number=1000)
+print(f"Execution Time: {execution_time:.5f} seconds")
+🔹 Runs the snippet 1000 times and measures execution time.
+
+🛠️ Using cProfile for Profiling Code
+Used to analyze performance bottlenecks.
+
+ 
+import cProfile
+
+def slow_function():
+    total = 0
+    for i in range(1, 1000000):
+        total += i
+    return total
+
+cProfile.run("slow_function()")
+🔹 Shows function call times and execution breakdown.
+
+4. Summary Table
+Concept	Module	Use Case
+Multithreading	threading	I/O-bound tasks (Web Scraping, File I/O)
+Multiprocessing	multiprocessing	CPU-bound tasks (ML, Image Processing)
+Async Programming	asyncio	Concurrent Network Requests, APIs
+Performance Benchmarking	timeit	Measure execution time of small code snippets
+Code Profiling	cProfile	Find performance bottlenecks
